@@ -8,7 +8,6 @@
 <p align="center">
   <a href="https://khatak-two.vercel.app/"><img src="https://img.shields.io/badge/demo-live-2fb87f?style=flat-square" alt="Live demo"></a>
   <img src="https://img.shields.io/badge/stack-vanilla%20JS-1fb8ad?style=flat-square" alt="Vanilla JS">
-  <img src="https://img.shields.io/badge/build-none-ffb300?style=flat-square" alt="No build step">
   <img src="https://img.shields.io/badge/i18n-EN%20%2F%20AR-e6453c?style=flat-square" alt="English and Arabic">
 </p>
 
