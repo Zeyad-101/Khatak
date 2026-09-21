@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KHATAK · Cairo Metro Route Board</title>
+<meta name="description" content="Pick a start and end station on the Cairo Metro and get the fastest line, an estimated fare, and a live read on whether you're walking into rush hour.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <img src="logo.png" alt="Khatak logo" class="masthead-logo">
+  </div>
+
+  <div class="board-frame">
+    <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
+
+    <div class="plate-header">
+      <a class="plate-title-group brand-link" href="./" aria-label="Khatak home">
+        <img class="brand-logo" src="logo.png" alt="Khatak logo">
+        <div>
+          <div class="plate-title">KHATAK</div>
+          <div class="plate-sub" data-i18n="subtitle">Cairo Metro Route Board</div>
+        </div>
+      </a>
+      <div class="header-right">
+        <div class="status-wrap"><span class="status-dot"></span><span data-i18n="linesTag">3 LINES</span></div>
+        <button class="lang-toggle" id="langToggle" type="button">عربي</button>
+      </div>
+    </div>
+
+    <div class="section-eyebrow" data-i18n="routeEyebrow">ROUTE</div>
+    <div class="controls">
+      <div class="row2">
+        <div class="field">
+          <label for="fromInput"><svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="fromLabel">FROM</span></label>
+          <div class="combo">
+            <input id="fromInput" type="text" autocomplete="off" placeholder="Type a station…" data-i18n-placeholder="placeholder">
+            <div id="fromList" class="combo-list"></div>
+          </div>
+        </div>
+        <button class="swap-btn" id="swapBtn" title="Swap stations" aria-label="Swap stations">⇅</button>
+        <div class="field">
+          <label for="toInput"><svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h13l-3 4 3 4H5"/></svg><span data-i18n="toLabel">TO</span></label>
+          <div class="combo">
+            <input id="toInput" type="text" autocomplete="off" placeholder="Type a station…" data-i18n-placeholder="placeholder">
+            <div id="toList" class="combo-list"></div>
+          </div>
+        </div>
+      </div>
+      <button class="go-btn" id="goBtn" data-i18n="goBtn">FIND ROUTE ▶</button>
+    </div>
+
+    <div class="screen-wrap">
+      <div class="screen" id="screen"></div>
+    </div>
+
+    <div class="browse-head">
+      <div class="section-eyebrow" style="padding:0; border-top:none;" data-i18n="browseEyebrow">BROWSE ALL 89 STATIONS</div>
+      <div class="tabs">
+        <button class="tab-btn active" id="tabMapBtn"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span data-i18n="tabMap">MAP</span></button>
+        <button class="tab-btn" id="tabListBtn"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="6" r="1.2" fill="currentColor" stroke="none"/><path d="M9 6h11"/><circle cx="4" cy="12" r="1.2" fill="currentColor" stroke="none"/><path d="M9 12h11"/><circle cx="4" cy="18" r="1.2" fill="currentColor" stroke="none"/><path d="M9 18h11"/></svg><span data-i18n="tabList">LIST</span></button>
+        <button class="tab-btn" id="tabMonoBtn"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="7" rx="3.5"/><path d="M7 14v3M17 14v3M2 19h20"/></svg><span data-i18n="tabMono">MONORAIL</span></button>
+      </div>
+    </div>
+    <div class="hint" id="browseHint" data-i18n="hint">Tap a station to set <b>A (from)</b>, tap another for <b>B (to)</b>.</div>
+
+    <div class="browse-panel active" id="mapPanel"></div>
+    <div class="browse-panel" id="listPanel"></div>
+    <div class="browse-panel" id="monoPanel"></div>
+  </div>
+
+  <div class="footnote" data-i18n="footnote">Distances are counted in station-stops, not km. Treat fare and stop counts as solid estimates, not an official reading. Fares follow current 2026 Ministry of Transport tiers.</div>
+  <div class="credit">© <span id="year"></span> <span data-i18n="creditPrefix">Khatak · built by</span> <a href="https://zeyad-101.github.io" target="_blank" rel="noopener">Zeyad</a></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
